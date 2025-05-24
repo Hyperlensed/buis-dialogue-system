@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7gekfuvm3fb5"
-path="res://.godot/imported/Icon.svg-9518bd58ccb01f936c1b6aae786b1bcf.ctex"
+uid="uid://00arulnduall"
+path="res://.godot/imported/Character.svg-89cd5b52d138f87b438834a69237cb22.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/Hyperlensed/buis-dialogue-system/EditorPlugin/UI/Icon.svg"
-dest_files=["res://.godot/imported/Icon.svg-9518bd58ccb01f936c1b6aae786b1bcf.ctex"]
+source_file="res://addons/Hyperlensed/buis-dialogue-system/EditorPlugin/UI/Icons/Character.svg"
+dest_files=["res://.godot/imported/Character.svg-89cd5b52d138f87b438834a69237cb22.ctex"]
 
 [params]
 

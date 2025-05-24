@@ -9,17 +9,21 @@ using BuisDialogueSystem.EditorPlugin.UI;
 namespace BuisDialogueSystem.EditorPlugin {
 	[Tool]
     public partial class BuisDialogueSystemPlugin : Godot.EditorPlugin {
-        public const string PluginName = "Buis";
+        public const string PluginName = "Dialogues";
 
         public override void _EnterTree() {
             RegisterCustomTypes();
 			RegisterCustomResources();
+#if TOOLS
+			InitializeMainScreen();
+#endif
         }
         public override void _ExitTree() {
             UnregisterCustomTypes();
 			UnregisterCustomResources();
 #if TOOLS
-            _mainScreen.QueueFree();
+            _mainScreen?.Free();
+			_mainScreen = null;
 #endif
         }
 
@@ -27,6 +31,19 @@ namespace BuisDialogueSystem.EditorPlugin {
 #if TOOLS
         private BuisDialogueSystemMainScreen _mainScreen = null;
         
+		private void InitializeMainScreen() {
+			// Initialize self has Editor Plugin Main Screen
+			VBoxContainer editorMainScreenContainer = EditorInterface.Singleton.GetEditorMainScreen();
+
+			PackedScene buisDialogueSystemMainScreenPackedScene = ResourceLoader.Load<PackedScene>(
+                ((Resource)GetScript()).ResourcePath.GetBaseDir() + "/UI/BuisDialogueSystemMainScreen.tscn",
+                "PackedScene"
+            );
+			_mainScreen = buisDialogueSystemMainScreenPackedScene.Instantiate<BuisDialogueSystemMainScreen>();
+			editorMainScreenContainer.AddChild(_mainScreen);
+
+			_MakeVisible(false);
+		}
         public override string _GetPluginName() {
             return PluginName;
         }
@@ -42,10 +59,6 @@ namespace BuisDialogueSystem.EditorPlugin {
 		    return true;
 	    }
         public override void _MakeVisible(bool visible) {
-			if (_mainScreen == null) {
-                _mainScreen = new BuisDialogueSystemMainScreen();
-            }
-
 			_mainScreen.Visible = visible;
         }
 #endif
